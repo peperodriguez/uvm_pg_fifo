@@ -3,30 +3,32 @@ package fifo_pkg;
 
   typedef enum {wr, rd, nop, reset} fifo_op;
 
-  virtual interface fifo_if glbl_fif;
-  virtual interface clk_if  glbl_clk;
+  localparam par_dw         = 64; // 64 bits Data Width 
+  localparam par_aw         = 4;  // 16 positions deep
+  localparam par_clk_period = 20; // Clock period
 
-  localparam par_dw = 64; // 64 bits Data Width 
-  localparam par_aw = 4;  // 16 positions deep
+  virtual interface fifo_if #(par_dw) glbl_fif;
+  virtual interface clk_if #(par_clk_period/2,par_clk_period/2) glbl_clk;
+  virtual interface rst_if glbl_rst;
 
   //bit             verbose = 0;
 
   `include "uvm_macros.svh"
 
   // uvm_objects
-  `include "interface_holder.svh"
+  `include "fifo_if_holder.svh"
 
   // uvm_transactions
 
   `include "fifo_output.svh" 
   `include "fifo_req.svh" 
-  //`include "test_seq.svh" 
+  `include "test_seq.svh" 
 
   // uvm_agents
 
   `include "driver.svh"
-  //`include "monitor.svh"
-  //`include "printer.svh"
+  `include "monitor.svh"
+  `include "printer.svh"
   //`include "predictor.svh" 
   //`include "comparator.svh" 
   //`include "coverage.svh" 

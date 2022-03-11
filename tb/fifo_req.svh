@@ -19,5 +19,4 @@ class fifo_req #(dw = 64) extends fifo_output#(dw);
     op  = RHS.op;
   endfunction : do_copy
 
-
 endclass : fifo_req

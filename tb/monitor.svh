@@ -42,6 +42,14 @@ class monitor extends uvm_agent
           req.op = rst;
         else 
           req.op = i.wen ? wr : rd;
+        `uvm_info("run",
+                  $psprintf("Monitor detected req %s",
+                            req.convert2string()),
+                  UVM_DEBUG);
+        `uvm_info("run",
+                  $psprintf("Monitor detected rsp %s",
+                            rsp.convert2string()),
+                  UVM_DEBUG);
       end : got_an_op
     end : forever_loop
 

@@ -2,9 +2,9 @@ class fifo_if_holder extends uvm_object;
 
   virtual interface  fifo_if  fif;
 
-  function new(virtual interface fifo_if ifif);
+  function new(virtual interface fifo_if i);
 
-    fif = ifif;
+    fif = i;
 
   endfunction : new
 

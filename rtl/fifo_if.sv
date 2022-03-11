@@ -14,14 +14,25 @@ interface fifo_if;
   // Monitor modport
   modport fifo_mon (
     input   din,
+    input   dout,
+    input   wen,
+    input   ren,
+    input   empty,
+    input   full
+  );
+
+  // Server modport (i.e. the FIFO)
+  modport fifo_srv (
+    input   din,
     output  dout,
     input   wen,
     input   ren,
     output  empty,
     output  full
   );
-  // Driver modport
-  modport fifo_drv (
+
+  // Client modport (i.e. the user of the FIFO)
+  modport fifo_cln (
     output  din,
     input   dout,
     output  wen,

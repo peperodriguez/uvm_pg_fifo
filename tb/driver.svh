@@ -4,6 +4,7 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
   uvm_object                tmp;
   virtual interface fifo_if i;
   virtual interface clk_if  ck;
+  virtual interface rst_if  rst;
   fifo_req                  req;
   fifo_output               rsp;
 
@@ -13,11 +14,24 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
 
   function build_phase(uvm_phase phase);
     super.build_phase(phase);
-    i   = fifo_pkg::glbl_fif.fifo_drv;
+    i   = fifo_pkg::glbl_fif.fifo_cln;
     ck  = fifo_pkg::glbl_clk;
+    rst = fifo_pkg::glbl_rst.rst_drv;
   endfunction : build_phase
 
+  task do_reset(int cycles);
+    // Assert the reset for cycles cc
+    rst.rst = 1;
+    repeat(cycles) @(posedge ck.clk);
+
+    // De-assert and wait 2 cc
+    rst.rst = 0;
+    repeat(cycles) @(posedge ck.clk);
+
+  endtask : do_reset
+
   task run_phase(uvm_phase phase);
+
     forever begin : main_driver_loop
       @(negedge ck.clk);
       i.wen = 0;
@@ -39,6 +53,7 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
           nop : begin 
           end
           reset : begin 
+            do_reset(10);
           end
         endcase
       end : got_req
