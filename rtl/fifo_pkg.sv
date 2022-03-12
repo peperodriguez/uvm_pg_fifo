@@ -29,8 +29,8 @@ package fifo_pkg;
   `include "driver.svh"
   `include "monitor.svh"
   `include "printer.svh"
-  //`include "predictor.svh" 
-  //`include "comparator.svh" 
+  //`include "fifo_model.svh" 
+  `include "scbd.svh" 
   //`include "coverage.svh" 
 
   // uvm_environments
