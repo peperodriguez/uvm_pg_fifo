@@ -57,7 +57,25 @@ class fifo_env extends uvm_env;
     // and the scbd instance reads from the fifo (thropugh the predicted_p)
     mdl.rsp_p.connect(mdl2s_f.blocking_put_export);
     s.predicted_p.connect(mdl2s_f.blocking_get_export);
+
+    // Monitor as a broadcaster of reqs and rsps captured at the DUT
+
+    // Requests sent to the fifo model, the requests printer and the coverage
+    m.req_p.connect(mdl.req_f.analysis_export);
+    m.req_p.connect(p_req.d_f.analysis_export);
+    //m.req_p.connect(cov.req_f.analysis_export);
+
+    // Responses sent to the scbd, the responses printer and the coverage
+    m.rsp_p.connect(s.actual_f.analysis_export);
+    m.rsp_p.connect(p_rsp.d_f.analysis_export);
+    //m.rsp_p.connect(cov.output_f.analysis_export);
      
   endfunction : connect_phase
+
+  task run_phase(uvm_phase phase);
+    phase.raise_objection(this);
+    seq.start(sqr);
+    phase.drop_objection(this);
+  endtask : run_phase
 
 endclass : fifo_env

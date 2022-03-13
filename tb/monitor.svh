@@ -6,8 +6,8 @@ class monitor extends uvm_agent
   virtual interface clk_if c;
   virtual interface rst_if r;
 
-  uvm_analysis_port #(fifo_output) rsp_port;
-  uvm_analysis_port #(fifo_req) req_port;
+  uvm_analysis_port #(fifo_output) rsp_p;
+  uvm_analysis_port #(fifo_req) req_p;
 
   function new( string name = "", uvm_component parent);
     super.new(name, parent);
@@ -42,6 +42,8 @@ class monitor extends uvm_agent
           req.op = rst;
         else 
           req.op = i.wen ? wr : rd;
+        rsp_p.write(rsp);
+        req_p.write(req);
         `uvm_info("run",
                   $psprintf("Monitor detected req %s",
                             req.convert2string()),

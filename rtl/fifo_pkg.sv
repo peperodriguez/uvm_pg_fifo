@@ -11,8 +11,6 @@ package fifo_pkg;
   virtual interface clk_if #(par_clk_period/2,par_clk_period/2) glbl_clk;
   virtual interface rst_if glbl_rst;
 
-  //bit             verbose = 0;
-
   `include "uvm_macros.svh"
 
   // uvm_objects
@@ -34,11 +32,11 @@ package fifo_pkg;
   //`include "coverage.svh" 
 
   // uvm_environments
-  //`include "fifo_env.svh"
+  `include "fifo_env.svh"
 
   // uvm_tests
-  //`include "fifo_test.svh"   
-  //`include "verbose_test.svh" 
+  `include "fifo_tc.svh"   
+  //`include "verbose_tc.svh" 
 
 
 endpackage // fifo_pkg
