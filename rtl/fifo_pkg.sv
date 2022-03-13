@@ -29,7 +29,7 @@ package fifo_pkg;
   `include "driver.svh"
   `include "monitor.svh"
   `include "printer.svh"
-  //`include "fifo_model.svh" 
+  `include "fifo_model.svh" 
   `include "scbd.svh" 
   //`include "coverage.svh" 
 

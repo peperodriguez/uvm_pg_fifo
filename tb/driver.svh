@@ -63,7 +63,7 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
       rsp.empty = i.empty;
       rsp.full  = i.full;
       rsp.set_id_info(req);
-      set_item_port.put_response(rsp);
+      seq_item_port.put_response(rsp);
     end : main_driver_loop
   endtask
 
