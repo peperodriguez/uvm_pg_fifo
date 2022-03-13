@@ -10,7 +10,7 @@ class fifo_model #(fifo_size = 4) extends uvm_agent;
   logic full;
   
 
-  function new (string name = "", uvm_component parent)
+  function new (string name = "", uvm_component parent);
     super.new(name, parent);
     mem   = {};
     empty = 1'b1;
@@ -30,22 +30,25 @@ class fifo_model #(fifo_size = 4) extends uvm_agent;
     forever begin : forever_loop
       req_f.get(req);
       case (req.op)
-        reset :
+        reset : begin
           mem   = {};
           empty = 1'b1;
           full  = 1'b0;
-        wr : 
+        end
+        wr : begin 
           if (!full) begin
             mem.push_back(req.data);
             if (mem.size() == fifo_size) full = 1'b1;
             empty = 1'b0;
           end
-        rd :
+        end
+        rd : begin
           if (!empty) begin
             mem.pop_front();
             if (mem.size() == 0) empty = 1'b1;
             full = 1'b0;
           end
+        end
       endcase
       rsp.data = mem[0];
       rsp.empty = empty;

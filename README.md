@@ -1,7 +1,7 @@
 # edapg_uvm_fifo
 EDA Playground FIFO example
 
-The playgroung is at https://www.edaplayground.com and it is named "UVM_fifo_mux".
+The playgroung is at https://www.edaplayground.com and it is named "edapg_uvm_fifo".
 
 Files can only be uploaded manually to EDA Playground.
 
@@ -13,6 +13,6 @@ Tools & Simulators : "Cadence Xcelium 20.09"
 
 Compile options : "-timescale 1ns/1ns -sysv"
 
-Run options : "-access +rw -f filelist +UVM_TESTNAME=fifo_test"
+Run options : "-access +rw -f filelist +UVM_TESTNAME=fifo_tc"
 
 Deselect both "run.do" and "run.bash"

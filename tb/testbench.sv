@@ -12,8 +12,8 @@ module top;
     .dw(fifo_pkg::par_dw),
     .aw(fifo_pkg::par_aw)
   ) DUT (
-    .clk    (clk_if.clk),
-    .rst_n  (!rst_if.rst),
+    .clk    (clk_i.clk),
+    .rst_n  (!rst_i.rst),
 
     .din    (ff_i.fifo_drv.din),
     .ren    (ff_i.fifo_drv.ren),

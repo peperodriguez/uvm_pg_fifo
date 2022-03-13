@@ -1,6 +1,6 @@
-class monitor extends uvm_agent
+class monitor extends uvm_agent;
 
-  `uvm_component_utils(monitor);
+  `uvm_component_utils(monitor)
 
   virtual interface fifo_if i;
   virtual interface clk_if c;
@@ -31,7 +31,7 @@ class monitor extends uvm_agent
     wait (r.rst == 1'b0);
 
     forever begin : forever_loop
-      @posedge(c.clk);
+      @(posedge c.clk);
       #1 // Why?
       if (i.rst || i.wen  || i.ren) begin : got_an_op
         rsp.data  = i.dout;

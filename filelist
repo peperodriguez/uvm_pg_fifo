@@ -1,3 +1,5 @@
+fifo_pkg.sv
 fifo_scd.sv
 fifo_if.sv
-fifo_pkg.sv
+clk_if.sv
+rst_if.sv

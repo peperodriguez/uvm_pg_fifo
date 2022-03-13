@@ -14,7 +14,7 @@ module fifo_scd
   output logic [dw-1:0] dout,
   output logic empty,
   output logic full
-)
+);
 
 localparam sz = 1<<aw;
 

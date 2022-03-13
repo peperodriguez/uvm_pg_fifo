@@ -5,4 +5,4 @@ interface rst_if;
   modport rst_drv ( input  rst );
   modport rst_rcv ( output rst );
 
-endinterface : clk_if
+endinterface : rst_if

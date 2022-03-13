@@ -1,7 +1,7 @@
 `include "uvm_macros.svh"
 
 class fifo_tc extends uvm_test;
-  `uvm_component_utils(fifo_tc);
+  `uvm_component_utils(fifo_tc)
 
   fifo_env e;
 

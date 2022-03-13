@@ -1,4 +1,4 @@
-interface clk_if;
+interface clk_if
   #(
       parameter clk_high  = 10,
       parameter clk_low   = 10

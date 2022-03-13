@@ -1,5 +1,5 @@
 class driver extends uvm_driver #(fifo_req,fifo_output);
-  `uvm_component_utils(driver);
+  `uvm_component_utils(driver)
 
   uvm_object                tmp;
   virtual interface fifo_if i;

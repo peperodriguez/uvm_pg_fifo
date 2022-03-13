@@ -1,5 +1,5 @@
 class test_seq extends uvm_sequence #(fifo_req,fifo_output);
-  `uvm_objects_utils(test_seq)
+  `uvm_object_utils(test_seq)
 
   fifo_req req;
   fifo_output rsp;
@@ -23,7 +23,7 @@ class test_seq extends uvm_sequence #(fifo_req,fifo_output);
     req = new();
     start_item(req);
     req.op = wr;
-    req.data = fifo_pkg::par_dw'h1;
+    req.data = (fifo_pkg::par_dw)'h1;
     `uvm_info("test_seq",{"Sending transaction ",req.convert2string()}, UVM_MEDIUM);
     finish_item(req);
     get_response(rsp);
