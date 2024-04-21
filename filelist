@@ -1,5 +1,7 @@
-fifo_pkg.sv
+fifo_tb_pkg.sv
+mem_dp.sv
 fifo_scd.sv
 fifo_if.sv
 clk_if.sv
 rst_if.sv
+tb.sv

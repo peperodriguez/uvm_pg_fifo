@@ -1,17 +1,16 @@
-interface clk_if
-  #(
-      parameter clk_high  = 10,
-      parameter clk_low   = 10
-    );
-  
+interface clk_if #(
+  parameter int CLK_HIGH  = 10,
+  parameter int CLK_LOW   = 10
+);
+
   logic clk;
 
   initial begin : clk_gen
     clk = 0;
     forever begin
-      #clk_low;
+      #CLK_LOW;
       clk = 1;
-      #clk_high;
+      #CLK_HIGH;
       clk = 0;
     end
   end

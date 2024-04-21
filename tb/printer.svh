@@ -8,9 +8,9 @@ class printer #(type T=fifo_output) extends uvm_agent;
     super.new(name, parent);
   endfunction : new
 
-  function void build_phase(uvm_phase phase);
+  virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    d_f = new("d_f",this);
+    d_f = uvm_tlm_analysis_fifo#(T)::type_id::create("d_f",this);
   endfunction : build_phase
 
   task run_phase(uvm_phase phase);
@@ -20,5 +20,5 @@ class printer #(type T=fifo_output) extends uvm_agent;
       `uvm_info("run",d.convert2string(),UVM_MEDIUM);
     end
   endtask : run_phase
-  
+
 endclass : printer

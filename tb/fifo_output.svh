@@ -1,13 +1,13 @@
-class fifo_output #(dw = 64) extends uvm_sequence_item;
+class fifo_output #(DW = 64) extends uvm_sequence_item;
 
-  `uvm_object_utils(fifo_output)    
+  `uvm_object_param_utils(fifo_output#(DW))
 
-  rand logic [dw-1:0] data;
-  logic empty;
-  logic full;
+  rand logic [DW-1:0] data;
+  logic               empty;
+  logic               full;
 
-  function new();
-    super.new();
+  function new(string name="", uvm_component parent=null);
+    super.new(name);
   endfunction : new
 
   function string convert2string();
@@ -26,7 +26,7 @@ class fifo_output #(dw = 64) extends uvm_sequence_item;
   function bit comp(uvm_object rhs);
     fifo_output RHS;
     $cast(RHS,rhs);
-    return (data == RHS.data) && (empty==RHS.empty) && (full==RHS.full);
+    return (data === RHS.data) && (empty==RHS.empty) && (full==RHS.full);
   endfunction : comp
 
 endclass : fifo_output

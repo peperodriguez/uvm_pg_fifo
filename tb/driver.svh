@@ -2,7 +2,7 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
   `uvm_component_utils(driver)
 
   uvm_object                tmp;
-  virtual interface fifo_if i;
+  virtual interface fifo_if #(.DW(fifo_tb_pkg::PAR_DW)) i;
   virtual interface clk_if  ck;
   virtual interface rst_if  rst;
   fifo_req                  req;
@@ -12,11 +12,11 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
     super.new(name, parent);
   endfunction : new
 
-  function build_phase(uvm_phase phase);
+  virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    i   = fifo_pkg::glbl_fif.fifo_cln;
-    ck  = fifo_pkg::glbl_clk;
-    rst = fifo_pkg::glbl_rst.rst_drv;
+    i   = fifo_tb_pkg::glbl_fif.fifo_srv;
+    ck  = fifo_tb_pkg::glbl_clk;
+    rst = fifo_tb_pkg::glbl_rst;
   endfunction : build_phase
 
   task do_reset(int cycles);
@@ -26,16 +26,15 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
 
     // De-assert and wait 2 cc
     rst.rst = 0;
-    repeat(cycles) @(posedge ck.clk);
+    repeat(2) @(posedge ck.clk);
 
   endtask : do_reset
 
   task run_phase(uvm_phase phase);
-
     forever begin : main_driver_loop
       @(negedge ck.clk);
-      i.wen = 0;
-      i.ren = 0;
+      i.we  = 0;
+      i.re  = 0;
       i.din = 0;
       seq_item_port.get_next_item(req);
       if (req != null) begin : got_req
@@ -43,17 +42,19 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
         case (req.op)
           wr : begin
             i.din = req.data;
-            i.wen = 1;
-            i.ren = 0;
+            i.we  = 1;
+            i.re  = 0;
           end
           rd : begin
-            i.ren = 1;
-            i.wen = 0;
+            i.re  = 1;
+            i.we  = 0;
           end
-          nop : begin 
+          nop : begin
           end
-          reset : begin 
-            do_reset(10);
+          reset : begin
+            do_reset(4);
+            i.we = 0;
+            i.re = 0;
           end
         endcase
       end : got_req
@@ -66,7 +67,5 @@ class driver extends uvm_driver #(fifo_req,fifo_output);
       seq_item_port.put_response(rsp);
     end : main_driver_loop
   endtask
-
-
 
 endclass

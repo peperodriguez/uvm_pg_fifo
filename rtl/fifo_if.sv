@@ -1,32 +1,31 @@
-interface fifo_if;
-  #(
-    parameter dw = 32
+interface fifo_if #(
+    parameter DW = 32
   );
 
   // Port List
-  logic [dw-1:0]  dout;
-  logic [dw-1:0]  din;
-  logic           wen;
-  logic           ren;
+  logic [DW-1:0]  dout;
+  logic [DW-1:0]  din;
+  logic           we;
+  logic           re;
   logic           empty;
   logic           full;
 
   // Monitor modport
   modport fifo_mon (
-    input   din,
-    input   dout,
-    input   wen,
-    input   ren,
-    input   empty,
-    input   full
+    output   din,
+    output   dout,
+    output   we,
+    output   re,
+    output   empty,
+    output   full
   );
 
   // Server modport (i.e. the FIFO)
   modport fifo_srv (
     input   din,
     output  dout,
-    input   wen,
-    input   ren,
+    input   we,
+    input   re,
     output  empty,
     output  full
   );
@@ -35,8 +34,8 @@ interface fifo_if;
   modport fifo_cln (
     output  din,
     input   dout,
-    output  wen,
-    output  ren,
+    output  we,
+    output  re,
     input   empty,
     input   full
   );

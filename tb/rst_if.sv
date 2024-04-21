@@ -1,5 +1,5 @@
 interface rst_if;
-  
+
   logic rst;
 
   modport rst_drv ( input  rst );

@@ -9,9 +9,15 @@ class fifo_tc extends uvm_test;
     super.new(name, parent);
   endfunction : new
 
-  function build_phase(uvm_phase phase);
+  virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     e = fifo_env::type_id::create("e",this);
   endfunction : build_phase
+  
+  virtual task run_phase (uvm_phase phase);
+    phase.raise_objection(this);
+    
+    phase.drop_objection(this);
+  endtask : run_phase
 
 endclass : fifo_tc
