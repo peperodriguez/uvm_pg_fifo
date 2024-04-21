@@ -1,5 +1,10 @@
-# edapg_uvm_fifo
-EDA Playground FIFO example
+# uvm_pg_fifo
+
+UVM Playground with a simple single-clock FIFO.
+
+
+
+## EDA Playground Instructions
 
 The playgroung is at https://www.edaplayground.com and it is named "edapg_uvm_fifo".
 
@@ -7,7 +12,7 @@ Files can only be uploaded manually to EDA Playground.
 
 The file `edapg_uvm_fifo/filelist`contains a list of the files passed by the EDA Playground run script to incisive.
 
-## EDA Playground settings
+### Settings
 
 Tools & Simulators : "Cadence Xcelium 20.09"
 
