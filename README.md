@@ -10,7 +10,7 @@ The playgroung is at https://www.edaplayground.com and it is named "edapg_uvm_fi
 
 Files can only be uploaded manually to EDA Playground.
 
-The file `edapg_uvm_fifo/filelist`contains a list of the files passed by the EDA Playground run script to incisive.
+The file `uvm_pg_fifo/filelist`contains a list of the files passed by the EDA Playground run script to incisive.
 
 ### Settings
 
